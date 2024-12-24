@@ -13,14 +13,17 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 ## Installation
 
 Clone the repository:
-git clone https://github.com/olgaserdiuk/questionnaire.git
-cd questionnaire
+
+1. git clone https://github.com/olgaserdiuk/questionnaire.git
+2. cd questionnaire
 
 Install dependencies:
-npm install
+
+- npm install
 
 To start a local development server, run:
-ng serve
+
+- ng serve
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
