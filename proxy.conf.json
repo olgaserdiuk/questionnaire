@@ -1,0 +1,10 @@
+{
+  "/searchq": {
+    "target": "https://www.doctoranytime.gr",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}
+
+

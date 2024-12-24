@@ -1,0 +1,119 @@
+<div class="wrapper">
+  <mat-progress-bar
+    mode="determinate"
+    [value]="getProgressValue()"
+    class="status-bar"
+  ></mat-progress-bar>
+  <section class="content">
+    <header>
+      <div class="row logo-box">
+        <app-logo></app-logo>
+      </div>
+    </header>
+    <main>
+      <div class="row d-flex justify-content-center">
+        <div class="col-11 col-md-6">
+          <div class="question-container">
+            <div *ngIf="!finalUrl; else finalScreen" class="question-box">
+              <div *ngIf="currentQuestion" class="question-header">
+                <h2>{{ currentQuestion.Question }}</h2>
+                <span *ngIf="currentQuestion.IsOptional" class="optional-label"
+                  >Optional</span
+                >
+              </div>
+
+              <form class="options-form" *ngIf="currentQuestion">
+                <!-- Radio Buttons -->
+                <ng-container *ngIf="currentQuestion.QuestionSelectType === 0">
+                  <div
+                    *ngFor="let option of currentQuestion.Options"
+                    class="option"
+                    [ngClass]="{
+                      'selected-option': selectedOption?.Id === option.Id
+                    }"
+                  >
+                    <input
+                      type="radio"
+                      [id]="'option-' + option.Id"
+                      [name]="'question-' + currentQuestion.Id"
+                      (change)="selectedOption = option"
+                    />
+                    <label [for]="'option-' + option.Id">{{
+                      option.Answer
+                    }}</label>
+                  </div>
+                </ng-container>
+
+                <!-- Checkboxes -->
+                <ng-container *ngIf="currentQuestion.QuestionSelectType === 1">
+                  <div
+                    *ngFor="let option of currentQuestion.Options"
+                    class="option"
+                    [ngClass]="{
+                      'selected-option': selectedOptions.includes(option)
+                    }"
+                  >
+                    <input
+                      type="checkbox"
+                      [id]="'option-' + option.Id"
+                      (change)="toggleSelection(option)"
+                    />
+                    <label [for]="'option-' + option.Id">{{
+                      option.Answer
+                    }}</label>
+                  </div>
+                </ng-container>
+              </form>
+            </div>
+
+            <!-- Final Screen -->
+            <ng-template #finalScreen>
+              <div class="row d-flex justify-content-center final-screen">
+                <div class="col-8">
+                  <div class="row">
+                    <div class="col-12">
+                      <p class="title-comlete">Questionnaire Completed!</p>
+                      <p class="title-comlete">
+                        Use this url to find your match
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-10">
+                  <p class="url-style">
+                    <a [href]="finalUrl" target="_blank" class="final-url">{{
+                      finalUrl
+                    }}</a>
+                  </p>
+                </div>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </main>
+  </section>
+  <footer>
+    <div class="row actions">
+      <div class="col-11 col-md-7">
+        <div class="action-buttons">
+          <button
+            class="button back-btn"
+            [disabled]="history.length === 0"
+            (click)="goBack()"
+          >
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+          </button>
+          <button
+            class="button continue-button"
+            [disabled]="!isSelectionValid()"
+            (click)="proceed()"
+          >
+            Continue
+          </button>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>

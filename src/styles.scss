@@ -1,0 +1,9 @@
+body {
+  font-family: "Roboto", "Montserrat", "Mona Sans", serif;
+  background-color: #fff;
+  overflow-x: hidden;
+}
+
+.mdc-linear-progress__bar-inner {
+  --mdc-linear-progress-active-indicator-color: #1F74AD !important;
+}
